@@ -55,13 +55,12 @@ public class IndexServlet extends HttpServlet {
         request.setAttribute("messages_count", messages_count);     // 全件数
         request.setAttribute("page", page);                         // ページ数
 
-        //フラッシュメッセージがセッションスコープにセットされていたら
-        //リクエストスコープに保存する（セッションスコープからは削除）
+        // フラッシュメッセージがセッションスコープにセットされていたら
+        // リクエストスコープに保存する（セッションスコープからは削除）
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
         }
-
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/index.jsp");
         rd.forward(request, response);
 
